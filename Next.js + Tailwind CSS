@@ -1,0 +1,77 @@
+// src/app/dashboard/page.js
+"use client";
+import { useState, useEffect } from 'react';
+
+export default function HAIDashboard() {
+  const [data, setData] = useState({ profit: 0, income: 0, expense: 0 });
+  const [lang, setLang] = useState('hi'); // Default to Hindi
+
+  const translations = {
+    hi: { welcome: "नमस्ते मालिक", profit: "कुल मुनाफा", ask: "HAI से पूछें..." },
+    en: { welcome: "Welcome Master", profit: "Total Profit", ask: "Ask HAI..." },
+    ar: { welcome: "مرحباً يا معلم", profit: "إجمالي الربح", ask: "اسأل HAI..." }
+  };
+
+  const t = translations[lang];
+
+  return (
+    <div className="min-h-screen bg-[#0a0a0b] text-[#00f2ff] font-sans p-6">
+      {/* Top Navigation */}
+      <div className="flex justify-between items-center border-b border-[#1a1a1c] pb-4">
+        <h1 className="text-3xl font-black tracking-tighter">HAI GLOBAL <span className="text-xs bg-cyan-900 px-2 py-1 rounded">V3.0</span></h1>
+        
+        <div className="flex gap-4">
+          <select 
+            onChange={(e) => setLang(e.target.value)}
+            className="bg-[#111] border border-cyan-800 text-sm p-1 rounded outline-none"
+          >
+            <option value="hi">HINDI</option>
+            <option value="en">ENGLISH</option>
+            <option value="ar">ARABIC</option>
+          </select>
+          <div className="bg-red-900/20 text-red-500 border border-red-900 px-3 py-1 rounded text-xs flex items-center gap-2">
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+            MASTER SECURED
+          </div>
+        </div>
+      </div>
+
+      {/* Financial Pulse Widgets */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        <div className="bg-[#111] p-6 rounded-xl border border-[#1a1a1c] shadow-[0_0_20px_rgba(0,242,255,0.05)]">
+          <p className="text-gray-400 text-sm uppercase">{t.profit}</p>
+          <h2 className="text-4xl font-bold mt-2">₹32,000</h2>
+          <div className="w-full bg-gray-800 h-1 mt-4 rounded-full overflow-hidden">
+            <div className="bg-cyan-500 h-full w-[70%]"></div>
+          </div>
+        </div>
+        
+        <div className="bg-[#111] p-6 rounded-xl border border-[#1a1a1c]">
+          <p className="text-gray-400 text-sm uppercase">Agriculture Status</p>
+          <h2 className="text-xl font-bold mt-2 text-green-400">Wheat: Optimal</h2>
+          <p className="text-xs text-gray-500 mt-1">Next Irrigation: 14 Hours</p>
+        </div>
+
+        <div className="bg-[#111] p-6 rounded-xl border border-[#1a1a1c]">
+          <p className="text-gray-400 text-sm uppercase">Global Tax (GST)</p>
+          <h2 className="text-xl font-bold mt-2">₹5,760 <span className="text-xs text-gray-500">Payable</span></h2>
+        </div>
+      </div>
+
+      {/* AI Command Input */}
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4">
+        <div className="relative">
+          <input 
+            type="text" 
+            placeholder={t.ask}
+            className="w-full bg-[#111] border border-cyan-500/30 p-5 rounded-2xl shadow-2xl focus:border-cyan-500 outline-none transition-all pr-20"
+          />
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 bg-cyan-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-white transition-colors">
+            GO
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
