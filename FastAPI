@@ -1,0 +1,32 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from router import route  # आपका वो सीक्रेट राउटिंग लॉजिक
+import uvicorn
+
+app = FastAPI(title="HAI PRO v3 Ultra Engine")
+
+# डेटा स्ट्रक्चर जो आपने दिया
+class Request(BaseModel):
+    category: str
+    prompt: str
+
+@app.get("/")
+def read_root():
+    return {"status": "Online", "engine": "HAI Hari AI", "version": "3.0"}
+
+@app.post("/generate_all")
+async def generate(req: Request):
+    try:
+        # यहाँ आपका 'route' फंक्शन मैजिक करेगा
+        result = route(req.category, req.prompt)
+        
+        if not result:
+            raise HTTPException(status_code=404, detail="Service not found")
+            
+        return {"result": result}
+    except Exception as e:
+        return {"error": f"HAI Engine Error: {str(e)}"}
+
+# लोकल टेस्टिंग के लिए
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
