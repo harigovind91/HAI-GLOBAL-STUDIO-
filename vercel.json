@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/studio", "destination": "/api/index" },
+    { "source": "/chat_live", "destination": "/api/index" },
+    { "source": "/(.*)", "destination": "/api/index" }
+  ]
+}
