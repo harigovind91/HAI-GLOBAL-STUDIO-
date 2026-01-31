@@ -1,0 +1,25 @@
+from db import SessionLocal
+from models import Journal
+from sqlalchemy import func
+
+def ledger(account):
+    db = SessionLocal()
+    try:
+        # SQL स्तर पर ही सम (Sum) करना ज्यादा तेज़ होता है, पर आपका तरीका भी छोटा डेटा के लिए बेस्ट है
+        entries = db.query(Journal).filter(Journal.account == account).all()
+        
+        debit = sum(e.debit for e in entries)
+        credit = sum(e.credit for e in entries)
+        balance = debit - credit
+
+        return {
+            "account": account,
+            "total_debit": round(debit, 2),
+            "total_credit": round(credit, 2),
+            "balance": round(balance, 2),
+            "entries_count": len(entries)
+        }
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        db.close()
