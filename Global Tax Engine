@@ -1,0 +1,19 @@
+def universal_tax(amount, rate, country_code="IN"):
+    # देश के हिसाब से टैक्स का नाम सेट करना
+    tax_names = {
+        "IN": "GST", "AE": "VAT", "US": "Sales Tax", 
+        "UK": "VAT", "AU": "GST", "SG": "GST"
+    }
+    tax_name = tax_names.get(country_code.upper(), "Tax")
+
+    gst_value = round(amount * rate / 100, 2)
+    total = round(amount + gst_value, 2)
+
+    return {
+        "country": country_code.upper(),
+        "tax_type": tax_name,
+        "base_amount": amount,
+        "rate": f"{rate}%",
+        "tax_amount": gst_value,
+        "grand_total": total
+    }
