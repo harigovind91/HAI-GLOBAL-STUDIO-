@@ -1,0 +1,12 @@
+/HAI_GLOBAL_FRONTEND
+├── public/              # Icons, Flags for Languages
+├── src/
+│   ├── app/             # Next.js 14 App Router
+│   │   ├── layout.js    # Navbar & Global Auth
+│   │   ├── page.js      # The Galaxy Welcome UI
+│   │   ├── dashboard/   # Main Admin Area
+│   │   └── settings/    # Language & Currency Switch
+│   ├── components/      # UI Blocks (Charts, Tables)
+│   ├── hooks/           # AI Fetching Logic
+│   └── lib/             # API Connectors (FastAPI Link)
+└── .env.local           # MASTER_KEY=HAI_GLOBAL_ADMIN_2026
