@@ -1,0 +1,12 @@
+from apscheduler.schedulers.background import BackgroundScheduler
+from core.router import route
+
+def auto_audit():
+    print("HAI System: Running Daily Audit...")
+    # आपका ऑटोमैटिक लॉजिक यहाँ आएगा
+    route("accounting", "generate daily summary")
+
+scheduler = BackgroundScheduler()
+# हर रात 12 बजे टास्क ट्रिगर होगा
+scheduler.add_job(auto_audit, 'cron', hour=0, minute=0)
+scheduler.start()
