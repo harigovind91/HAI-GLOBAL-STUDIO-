@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pandas        <-- (CSV/Excel प्रोसेसिंग के लिए)
+openpyxl      <-- (Excel फाइल्स पढ़ने के लिए)
+python-dotenv
+google-generativeai
