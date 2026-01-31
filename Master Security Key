@@ -1,0 +1,6 @@
+# Banking API Security
+@app.post("/banking/import")
+def import_statement(file_data: dict, master_key: str):
+    if master_key != "HAI_GLOBAL_ADMIN_2026":
+        return {"error": "Critical: Unauthorized Banking Access. IP Blocked."}
+    # लॉजिक यहाँ...
